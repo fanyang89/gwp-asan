@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "gwp_asan/stack_trace_compressor.h"
+#include "stack_trace_compressor.h"
 
 namespace gwp_asan {
 namespace compression {

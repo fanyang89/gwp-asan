@@ -13,10 +13,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "gwp_asan/definitions.h"
-#include "gwp_asan/optional/backtrace.h"
-#include "gwp_asan/optional/printf.h"
-#include "gwp_asan/options.h"
+#include "../definitions.h"
+#include "backtrace.h"
+#include "printf.h"
+#include "../options.h"
 
 namespace {
 size_t Backtrace(uintptr_t *TraceBuffer, size_t Size) {
