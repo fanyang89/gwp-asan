@@ -41,7 +41,8 @@ int main() {
     gwp_asan::options::Options options;
     options.Enabled = true;
     options.MaxSimultaneousAllocations = 16;
-    options.SampleRate = 10;
+    options.SampleRate = 3;
+    options.Backtrace = gwp_asan::backtrace::getBacktraceFunction();
     allocator.init(options);
     gwp_asan::segv_handler::installSignalHandlers(
             &allocator, PrintfToBuffer,
