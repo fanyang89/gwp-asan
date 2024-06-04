@@ -8,7 +8,7 @@
 while read -r line; do
   # Check that this line needs symbolization.
   should_symbolize="$(echo $line |\
-     grep -E '^[ ]*\#.*\(.*\+0x[0-9a-f]+\) \[0x[0-9a-f]+\]$')"
+     grep -E '^[ ]*#.*\(.*\+0x[0-9a-f]+\) \[0x[0-9a-f]+\]$')"
 
   if [ -z "$should_symbolize" ]; then
     echo "$line"
@@ -21,7 +21,7 @@ while read -r line; do
   function_name="$(echo $line | grep -oE '\([^+]*' | cut -c2-)"
   function_offset="$(echo $line | grep -oE '\(.*\)' | grep -oE '\+.*\)' |\
       cut -c2- | rev | cut -c2- | rev)"
-  frame_number="$(echo $line | grep -oE '\#[0-9]+ ')"
+  frame_number="$(echo $line | grep -oE '#[0-9]+ ')"
 
   if [ -z "$function_name" ]; then
     # If the offset is binary-relative, just resolve that.
