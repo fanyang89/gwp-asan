@@ -6,15 +6,12 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <assert.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <string.h>
+#include <cstddef>
+#include <cstring>
 
 #include "gwp_asan/optional/backtrace.h"
 #include "gwp_asan/options.h"
 #include "sanitizer_common/sanitizer_common.h"
-#include "sanitizer_common/sanitizer_flag_parser.h"
 #include "sanitizer_common/sanitizer_flags.h"
 #include "sanitizer_common/sanitizer_stacktrace.h"
 
