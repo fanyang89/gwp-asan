@@ -52,3 +52,9 @@ Integration by simply performing the following steps:
             false
     );
     ```
+
+## Resolve output
+
+```bash
+./buggy-program | ./scripts/symbolize.sh
+```
