@@ -77,10 +77,6 @@ add_library(RTGwpAsanSegvHandler STATIC
     optional/segv_handler_posix.cpp
 )
 
-add_library(RTGwpAsanBacktraceSanitizerCommon STATIC
-    optional/backtrace_sanitizer_common.cpp
-)
-
 if (COMPILER_RT_INCLUDE_TESTS)
   add_subdirectory(tests)
 endif ()
