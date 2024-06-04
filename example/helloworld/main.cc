@@ -31,7 +31,9 @@ void operator delete(void *ptr) {
 static void PrintfToBuffer(const char *format, ...) {
     va_list args;
     va_start(args, format);
-    fprintf(stderr, format, args);
+    char buf[8192];
+    vsnprintf(buf, sizeof(buf), format, args);
+    printf("%.*s", sizeof buf, buf);
     va_end(args);
 }
 
@@ -39,7 +41,7 @@ int main() {
     gwp_asan::options::Options options;
     options.Enabled = true;
     options.MaxSimultaneousAllocations = 16;
-    options.SampleRate = 5000;
+    options.SampleRate = 10;
     allocator.init(options);
     gwp_asan::segv_handler::installSignalHandlers(
             &allocator, PrintfToBuffer,
@@ -48,7 +50,7 @@ int main() {
             false
     );
 
-    for (size_t i = 0; i < 10000; ++i) {
+    for (size_t i = 0; i < 10; ++i) {
         std::string s = "Hellooooooooooooooo ";
         std::string_view sv = s + "World";
         std::cout << sv << std::endl;
