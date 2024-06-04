@@ -3,36 +3,56 @@
 #include <iostream>
 #include <string>
 #include <string_view>
+#include <cstdarg>
 
 #include "gwp_asan/guarded_pool_allocator.h"
+#include "gwp_asan/optional/segv_handler.h"
+#include "gwp_asan/optional/backtrace.h"
 
 static gwp_asan::GuardedPoolAllocator allocator;
 
-void *operator new(std::size_t sz)
-{
-    if (allocator.shouldSample())
-    {
-        return allocator.allocate(sz, 0);
+static constexpr uint16_t MinAlignment = 16;
+
+void *operator new(std::size_t sz) {
+    if (allocator.shouldSample()) {
+        return allocator.allocate(sz, MinAlignment);
     }
     return malloc(sz);
 }
 
-void operator delete(void *ptr)
-{
-    allocator.deallocate(ptr);
+void operator delete(void *ptr) {
+    if (allocator.pointerIsMine(ptr)) {
+        allocator.deallocate(ptr);
+        return;
+    }
     free(ptr);
 }
 
-int *foo()
-{
-    int x;
-    return &x;
+static void PrintfToBuffer(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    fprintf(stderr, format, args);
+    va_end(args);
 }
 
-int main()
-{
-    std::string s = "Hellooooooooooooooo ";
-    std::string_view sv = s + "World\n";
-    std::cout << sv;
+int main() {
+    gwp_asan::options::Options options;
+    options.Enabled = true;
+    options.MaxSimultaneousAllocations = 16;
+    options.SampleRate = 5000;
+    allocator.init(options);
+    gwp_asan::segv_handler::installSignalHandlers(
+            &allocator, PrintfToBuffer,
+            gwp_asan::backtrace::getPrintBacktraceFunction(),
+            gwp_asan::backtrace::getSegvBacktraceFunction(),
+            false
+    );
+
+    for (size_t i = 0; i < 10000; ++i) {
+        std::string s = "Hellooooooooooooooo ";
+        std::string_view sv = s + "World";
+        std::cout << sv << std::endl;
+    }
+
     return 0;
 }

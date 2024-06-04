@@ -1,32 +1,29 @@
-cmake_minimum_required(VERSION 3.17)
-project(gwp_asan)
-
 set(GWP_ASAN_SOURCES
-  common.cpp
-  crash_handler.cpp
-  platform_specific/common_posix.cpp
-  platform_specific/guarded_pool_allocator_posix.cpp
-  platform_specific/mutex_posix.cpp
-  platform_specific/utilities_posix.cpp
-  guarded_pool_allocator.cpp
-  stack_trace_compressor.cpp
+    common.cpp
+    crash_handler.cpp
+    platform_specific/common_posix.cpp
+    platform_specific/guarded_pool_allocator_posix.cpp
+    platform_specific/mutex_posix.cpp
+    platform_specific/utilities_posix.cpp
+    guarded_pool_allocator.cpp
+    stack_trace_compressor.cpp
 )
 
 set(GWP_ASAN_HEADERS
-  common.h
-  crash_handler.h
-  definitions.h
-  guarded_pool_allocator.h
-  mutex.h
-  options.h
-  options.inc
-  platform_specific/guarded_pool_allocator_fuchsia.h
-  platform_specific/guarded_pool_allocator_posix.h
-  platform_specific/guarded_pool_allocator_tls.h
-  platform_specific/mutex_fuchsia.h
-  platform_specific/mutex_posix.h
-  stack_trace_compressor.h
-  utilities.h
+    common.h
+    crash_handler.h
+    definitions.h
+    guarded_pool_allocator.h
+    mutex.h
+    options.h
+    options.inc
+    platform_specific/guarded_pool_allocator_fuchsia.h
+    platform_specific/guarded_pool_allocator_posix.h
+    platform_specific/guarded_pool_allocator_tls.h
+    platform_specific/mutex_fuchsia.h
+    platform_specific/mutex_posix.h
+    stack_trace_compressor.h
+    utilities.h
 )
 
 # Ensure that GWP-ASan meets the delegated requirements of some supporting
@@ -45,21 +42,21 @@ string(REGEX REPLACE "-stdlib=[a-zA-Z+]*" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}
 # environment variable GWP_ASAN_FLAGS, but the allocator can choose to implement
 # its own options parsing and populate the Options struct itself.
 set(GWP_ASAN_OPTIONS_PARSER_SOURCES
-  optional/options_parser.cpp
+    optional/options_parser.cpp
 )
 set(GWP_ASAN_OPTIONS_PARSER_HEADERS
-  optional/options_parser.h
-  options.h
-  options.inc
+    optional/options_parser.h
+    options.h
+    options.inc
 )
 set(GWP_ASAN_BACKTRACE_HEADERS
-  optional/backtrace.h
-  options.h
-  options.inc
+    optional/backtrace.h
+    options.h
+    options.inc
 )
 set(GWP_ASAN_SEGV_HANDLER_HEADERS
-  optional/segv_handler.h
-  options.h)
+    optional/segv_handler.h
+    options.h)
 
 set(GWP_ASAN_OPTIONS_PARSER_CFLAGS ${GWP_ASAN_CFLAGS})
 
@@ -80,10 +77,10 @@ add_library(RTGwpAsanSegvHandler STATIC
     optional/segv_handler_posix.cpp
 )
 
-# add_library(RTGwpAsanBacktraceSanitizerCommon STATIC
-#     optional/backtrace_sanitizer_common.cpp
-# )
+add_library(RTGwpAsanBacktraceSanitizerCommon STATIC
+    optional/backtrace_sanitizer_common.cpp
+)
 
-if(COMPILER_RT_INCLUDE_TESTS)
+if (COMPILER_RT_INCLUDE_TESTS)
   add_subdirectory(tests)
-endif()
+endif ()
