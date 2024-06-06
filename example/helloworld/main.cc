@@ -11,11 +11,9 @@
 
 static gwp_asan::GuardedPoolAllocator allocator;
 
-static constexpr uint16_t MinAlignment = 16;
-
 void *operator new(std::size_t sz) {
     if (allocator.shouldSample()) {
-        return allocator.allocate(sz, MinAlignment);
+        return allocator.allocate(sz);
     }
     return malloc(sz);
 }
