@@ -6,7 +6,9 @@
 //
 //===----------------------------------------------------------------------===//
 
+#if __has_include(<features.h>)
 #include <features.h> // IWYU pragma: keep (for __BIONIC__ macro)
+#endif
 
 #ifdef __BIONIC__
 #include "gwp_asan/definitions.h"
