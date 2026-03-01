@@ -1,8 +1,0 @@
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/CMakeFiles/edit_cache.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/CMakeFiles/rebuild_cache.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan/CMakeFiles/RTGwpAsan.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan/CMakeFiles/RTGwpAsanOptionsParser.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan/CMakeFiles/RTGwpAsanBacktraceLibc.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan/CMakeFiles/RTGwpAsanSegvHandler.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan/CMakeFiles/edit_cache.dir
-/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan/CMakeFiles/rebuild_cache.dir

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libRTGwpAsanSegvHandler.a CMakeFiles/RTGwpAsanSegvHandler.dir/optional/segv_handler_posix.cpp.o
-/usr/bin/ranlib libRTGwpAsanSegvHandler.a
