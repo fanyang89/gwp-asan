@@ -6,9 +6,13 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <alloca.h>
 #if __has_include(<features.h>)
 #include <features.h> // IWYU pragma: keep (for __BIONIC__ macro)
 #endif
+#include <inttypes.h>
+#include <stdint.h>
+#include <string.h>
 
 #ifdef __BIONIC__
 #include "gwp_asan/definitions.h"
@@ -26,6 +30,23 @@ void die(const char *Message) {
   abort();
 #else  // __BIONIC__
   fprintf(stderr, "%s", Message);
+  __builtin_trap();
+#endif // __BIONIC__
+}
+
+void dieWithErrorCode(const char *Message, int64_t ErrorCode) {
+#ifdef __BIONIC__
+  if (&android_set_abort_message == nullptr)
+    abort();
+
+  size_t BufferSize = strlen(Message) + 48;
+  char *Buffer = static_cast<char *>(alloca(BufferSize));
+  snprintf(Buffer, BufferSize, "%s (Error Code: %" PRId64 ")", Message,
+           ErrorCode);
+  android_set_abort_message(Buffer);
+  abort();
+#else  // __BIONIC__
+  fprintf(stderr, "%s (Error Code: %" PRId64 ")", Message, ErrorCode);
   __builtin_trap();
 #endif // __BIONIC__
 }
