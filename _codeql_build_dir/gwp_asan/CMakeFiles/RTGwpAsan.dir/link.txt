@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRTGwpAsan.a CMakeFiles/RTGwpAsan.dir/common.cpp.o CMakeFiles/RTGwpAsan.dir/crash_handler.cpp.o CMakeFiles/RTGwpAsan.dir/platform_specific/common_posix.cpp.o CMakeFiles/RTGwpAsan.dir/platform_specific/guarded_pool_allocator_posix.cpp.o CMakeFiles/RTGwpAsan.dir/platform_specific/mutex_posix.cpp.o CMakeFiles/RTGwpAsan.dir/platform_specific/utilities_posix.cpp.o CMakeFiles/RTGwpAsan.dir/guarded_pool_allocator.cpp.o CMakeFiles/RTGwpAsan.dir/stack_trace_compressor.cpp.o
+/usr/bin/ranlib libRTGwpAsan.a

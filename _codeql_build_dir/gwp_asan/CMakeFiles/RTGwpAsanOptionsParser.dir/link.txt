@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRTGwpAsanOptionsParser.a CMakeFiles/RTGwpAsanOptionsParser.dir/optional/options_parser.cpp.o
+/usr/bin/ranlib libRTGwpAsanOptionsParser.a

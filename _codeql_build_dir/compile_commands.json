@@ -1,0 +1,68 @@
+[
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/common.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/common.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/common.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/common.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/crash_handler.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/crash_handler.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/crash_handler.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/crash_handler.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/platform_specific/common_posix.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/common_posix.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/common_posix.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/platform_specific/common_posix.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/platform_specific/guarded_pool_allocator_posix.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/guarded_pool_allocator_posix.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/guarded_pool_allocator_posix.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/platform_specific/guarded_pool_allocator_posix.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/platform_specific/mutex_posix.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/mutex_posix.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/mutex_posix.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/platform_specific/mutex_posix.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/platform_specific/utilities_posix.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/utilities_posix.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/platform_specific/utilities_posix.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/platform_specific/utilities_posix.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/guarded_pool_allocator.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/guarded_pool_allocator.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/guarded_pool_allocator.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/guarded_pool_allocator.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsan.dir/stack_trace_compressor.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/stack_trace_compressor.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/stack_trace_compressor.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsan.dir/stack_trace_compressor.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsanOptionsParser.dir/optional/options_parser.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/optional/options_parser.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/optional/options_parser.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsanOptionsParser.dir/optional/options_parser.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsanBacktraceLibc.dir/optional/backtrace_linux_libc.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/optional/backtrace_linux_libc.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/optional/backtrace_linux_libc.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsanBacktraceLibc.dir/optional/backtrace_linux_libc.cpp.o"
+},
+{
+  "directory": "/home/runner/work/gwp-asan/gwp-asan/_codeql_build_dir/gwp_asan",
+  "command": "/tmp/codeql-scratch-cddd2b3ecbadcc23/dbs/cpp/working/autobuild/bin/c++  -I/home/runner/work/gwp-asan/gwp-asan -O3 -DNDEBUG -o CMakeFiles/RTGwpAsanSegvHandler.dir/optional/segv_handler_posix.cpp.o -c /home/runner/work/gwp-asan/gwp-asan/gwp_asan/optional/segv_handler_posix.cpp",
+  "file": "/home/runner/work/gwp-asan/gwp-asan/gwp_asan/optional/segv_handler_posix.cpp",
+  "output": "gwp_asan/CMakeFiles/RTGwpAsanSegvHandler.dir/optional/segv_handler_posix.cpp.o"
+}
+]

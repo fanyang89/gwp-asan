@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRTGwpAsanBacktraceLibc.a CMakeFiles/RTGwpAsanBacktraceLibc.dir/optional/backtrace_linux_libc.cpp.o
+/usr/bin/ranlib libRTGwpAsanBacktraceLibc.a
