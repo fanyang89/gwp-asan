@@ -30,10 +30,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build libjemalloc-dev
+          sudo apt-get install -y cmake ninja-build libjemalloc-dev libgtest-dev
 
       - name: Configure
-        run: cmake -S . -B build -G Ninja -DBUILD_EXAMPLE=ON
+        run: cmake -S . -B build -G Ninja -DGWP_ASAN_BUILD_EXAMPLE=ON -DGWP_ASAN_BUILD_TESTING=ON
 
       - name: Build
         run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure

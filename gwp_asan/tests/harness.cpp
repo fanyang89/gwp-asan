@@ -10,23 +10,32 @@
 
 #include <string>
 
-// Optnone to ensure that the calls to these functions are not optimized away,
-// as we're looking for them in the backtraces.
-__attribute__((optnone)) char *
+#if defined(__clang__)
+#define GWP_ASAN_TEST_NOINLINE __attribute__((noinline, optnone))
+#elif defined(__GNUC__)
+#define GWP_ASAN_TEST_NOINLINE __attribute__((noinline))
+#else
+#define GWP_ASAN_TEST_NOINLINE
+#endif
+
+// Keep these calls visible in backtraces.
+GWP_ASAN_TEST_NOINLINE char *
 AllocateMemory(gwp_asan::GuardedPoolAllocator &GPA) {
   return static_cast<char *>(GPA.allocate(1));
 }
-__attribute__((optnone)) void
+GWP_ASAN_TEST_NOINLINE void
 DeallocateMemory(gwp_asan::GuardedPoolAllocator &GPA, void *Ptr) {
   GPA.deallocate(Ptr);
 }
-__attribute__((optnone)) void
+GWP_ASAN_TEST_NOINLINE void
 DeallocateMemory2(gwp_asan::GuardedPoolAllocator &GPA, void *Ptr) {
   GPA.deallocate(Ptr);
 }
-__attribute__((optnone)) void TouchMemory(void *Ptr) {
+GWP_ASAN_TEST_NOINLINE void TouchMemory(void *Ptr) {
   *(reinterpret_cast<volatile char *>(Ptr)) = 7;
 }
+
+#undef GWP_ASAN_TEST_NOINLINE
 
 void CheckOnlyOneGwpAsanCrash(const std::string &OutputBuffer) {
   const char *kGwpAsanErrorString = "GWP-ASan detected a memory error";

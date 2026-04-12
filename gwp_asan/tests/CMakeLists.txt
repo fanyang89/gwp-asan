@@ -1,18 +1,5 @@
-include(CompilerRTCompile)
-
-set(GWP_ASAN_UNITTEST_CFLAGS
-  ${COMPILER_RT_UNITTEST_CFLAGS}
-  ${COMPILER_RT_GTEST_CFLAGS}
-  ${SANITIZER_TEST_CXX_CFLAGS}
-  -std=c++17
-  -I${COMPILER_RT_SOURCE_DIR}/lib/
-  -O2
-  -g
-  -fno-omit-frame-pointer)
-
-file(GLOB GWP_ASAN_HEADERS ../*.h)
 set(GWP_ASAN_UNITTESTS
-  platform_specific/printf_sanitizer_common.cpp
+  platform_specific/printf_standalone.cpp
   alignment.cpp
   backtrace.cpp
   basic.cpp
@@ -32,53 +19,63 @@ set(GWP_ASAN_UNITTESTS
   utilities.cpp
 )
 
-set(GWP_ASAN_UNIT_TEST_HEADERS
-  ${GWP_ASAN_HEADERS}
-  harness.h)
+if (GWP_ASAN_GTEST_SOURCE_DIR)
+  set(GWP_ASAN_GTEST_ROOT "${GWP_ASAN_GTEST_SOURCE_DIR}")
+  if (EXISTS "${GWP_ASAN_GTEST_ROOT}/googletest")
+    set(GWP_ASAN_GTEST_ROOT "${GWP_ASAN_GTEST_ROOT}/googletest")
+  endif ()
+  if (NOT EXISTS "${GWP_ASAN_GTEST_ROOT}/include/gtest/gtest.h" OR
+      NOT EXISTS "${GWP_ASAN_GTEST_ROOT}/src/gtest-all.cc")
+    message(FATAL_ERROR
+      "GWP_ASAN_GTEST_SOURCE_DIR must point to a googletest checkout")
+  endif ()
 
-add_custom_target(GwpAsanUnitTests)
-set_target_properties(GwpAsanUnitTests PROPERTIES FOLDER "Compiler-RT/Tests")
+  add_library(gwp_asan_gtest STATIC
+    "${GWP_ASAN_GTEST_ROOT}/src/gtest-all.cc"
+  )
+  target_include_directories(gwp_asan_gtest PUBLIC
+    "${GWP_ASAN_GTEST_ROOT}/include"
+    "${GWP_ASAN_GTEST_ROOT}"
+  )
+  set(GWP_ASAN_GTEST_TARGET gwp_asan_gtest)
+else ()
+  find_package(GTest REQUIRED)
+  if (TARGET GTest::gtest)
+    set(GWP_ASAN_GTEST_TARGET GTest::gtest)
+  elseif (TARGET GTest::GTest)
+    set(GWP_ASAN_GTEST_TARGET GTest::GTest)
+  else ()
+    message(FATAL_ERROR "Could not find a usable GTest target")
+  endif ()
+endif ()
 
-set(GWP_ASAN_UNITTEST_LINK_FLAGS
-  ${COMPILER_RT_UNITTEST_LINK_FLAGS} -ldl
-  ${COMPILER_RT_UNWINDER_LINK_LIBS}
-  ${SANITIZER_TEST_CXX_LIBRARIES})
-list(APPEND GWP_ASAN_UNITTEST_LINK_FLAGS --driver-mode=g++)
-if(NOT WIN32)
-  list(APPEND GWP_ASAN_UNITTEST_LINK_FLAGS -pthread)
-endif()
+add_executable(gwp_asan_tests
+  ${GWP_ASAN_UNITTESTS}
+)
 
-if(COMPILER_RT_DEFAULT_TARGET_ARCH IN_LIST GWP_ASAN_SUPPORTED_ARCH)
-  # GWP-ASan unit tests are only run on the host machine.
-  set(arch ${COMPILER_RT_DEFAULT_TARGET_ARCH})
+target_link_libraries(gwp_asan_tests PRIVATE
+  RTGwpAsan
+  RTGwpAsanOptionsParser
+  RTGwpAsanBacktraceLibc
+  RTGwpAsanSegvHandler
+  ${GWP_ASAN_GTEST_TARGET}
+)
 
-  set(GWP_ASAN_TEST_RUNTIME RTGwpAsanTest.${arch})
+target_compile_features(gwp_asan_tests PRIVATE cxx_std_17)
+target_compile_options(gwp_asan_tests PRIVATE
+  -O0
+  -g
+  -fno-omit-frame-pointer
+  -fno-optimize-sibling-calls
+)
 
-  set(GWP_ASAN_TEST_RUNTIME_OBJECTS
-    $<TARGET_OBJECTS:RTGwpAsan.${arch}>
-    $<TARGET_OBJECTS:RTGwpAsanBacktraceSanitizerCommon.${arch}>
-    $<TARGET_OBJECTS:RTGwpAsanSegvHandler.${arch}>
-    $<TARGET_OBJECTS:RTGwpAsanOptionsParser.${arch}>
-    $<TARGET_OBJECTS:RTSanitizerCommon.${arch}>
-    $<TARGET_OBJECTS:RTSanitizerCommonLibc.${arch}>
-    $<TARGET_OBJECTS:RTSanitizerCommonSymbolizer.${arch}>
-    $<TARGET_OBJECTS:RTSanitizerCommonSymbolizerInternal.${arch}>)
+if (NOT WIN32)
+  target_link_libraries(gwp_asan_tests PRIVATE dl pthread)
+endif ()
 
-  add_library(${GWP_ASAN_TEST_RUNTIME} STATIC
-    ${GWP_ASAN_TEST_RUNTIME_OBJECTS})
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+  target_link_options(gwp_asan_tests PRIVATE -rdynamic)
+endif ()
 
-  set_target_properties(${GWP_ASAN_TEST_RUNTIME} PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    FOLDER "Compiler-RT/Tests/Runtime")
-
-  set(GwpAsanTestObjects)
-  generate_compiler_rt_tests(GwpAsanTestObjects
-    GwpAsanUnitTests "GwpAsan-${arch}-Test" ${arch}
-    SOURCES ${GWP_ASAN_UNITTESTS} ${COMPILER_RT_GTEST_SOURCE}
-    RUNTIME ${GWP_ASAN_TEST_RUNTIME}
-    DEPS ${GWP_ASAN_UNIT_TEST_HEADERS}
-    CFLAGS ${GWP_ASAN_UNITTEST_CFLAGS}
-    LINK_FLAGS ${GWP_ASAN_UNITTEST_LINK_FLAGS})
-  set_target_properties(GwpAsanUnitTests PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-endif()
+include(GoogleTest)
+gtest_discover_tests(gwp_asan_tests)
