@@ -87,10 +87,11 @@ void printHeader(Error E, uintptr_t AccessPtr,
   const char *OutOfBoundsAndUseAfterFreeWarning = "";
   if (E == Error::USE_AFTER_FREE && !AccessWasInBounds) {
     OutOfBoundsAndUseAfterFreeWarning =
-        " (warning: buffer overflow/underflow detected on a free()'d allocation.\n"
-        "This either means you have a buffer-overflow and a use-after-free at the same time,\n"
-        "or you have a long-lived use-after-free bug where the allocation/deallocation metadata below\n"
-        "has already been overwritten and is likely bogus)\n";
+        " (warning: buffer overflow/underflow detected on a free()'d "
+        "allocation. This either means you have a buffer-overflow and a "
+        "use-after-free at the same time, or you have a long-lived "
+        "use-after-free bug where the allocation/deallocation metadata below "
+        "has already been overwritten and is likely bogus)";
   }
 
   Printf("%s%s at 0x%zx %sby thread %s here:\n", gwp_asan::ErrorToString(E),
@@ -256,6 +257,7 @@ void installSignalHandlers(gwp_asan::GuardedPoolAllocator *GPA, Printf_t Printf,
   Action.sa_flags = SA_SIGINFO;
   sigaction(SIGSEGV, &Action, &PreviousHandler);
   SignalHandlerInstalled = true;
+  HasReportedBadPoolAccess = false;
 }
 
 void uninstallSignalHandlers() {
