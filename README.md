@@ -1,6 +1,11 @@
 # gwp-asan
 
+[![CI](https://github.com/fanyang89/gwp-asan/actions/workflows/ci.yml/badge.svg)](https://github.com/fanyang89/gwp-asan/actions/workflows/ci.yml)
+
 Independent standalone gwp-asan, from [llvm](https://github.com/llvm/llvm-project)
+
+This project is Linux only. It follows LLVM's upstream GWP-ASan support scope,
+which currently enables GWP-ASan on Linux.
 
 ## What's this
 
