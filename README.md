@@ -1,5 +1,7 @@
 # gwp-asan
 
+[![CI](https://github.com/fanyang89/gwp-asan/actions/workflows/ci.yml/badge.svg)](https://github.com/fanyang89/gwp-asan/actions/workflows/ci.yml)
+
 Independent standalone gwp-asan, from [llvm](https://github.com/llvm/llvm-project)
 
 ## What's this
