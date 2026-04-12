@@ -45,7 +45,7 @@ static void PrintBacktrace(uintptr_t *Trace, size_t TraceLength,
 
   for (size_t i = 0; i < TraceLength; ++i) {
     if (!BacktraceSymbols)
-      Printf("  #%zu %p\n", i, Trace[i]);
+      Printf("  #%zu 0x%zx\n", i, Trace[i]);
     else
       Printf("  #%zu %s\n", i, BacktraceSymbols[i]);
   }
