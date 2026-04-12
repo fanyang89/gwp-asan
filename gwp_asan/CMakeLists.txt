@@ -77,6 +77,6 @@ add_library(RTGwpAsanSegvHandler STATIC
     optional/segv_handler_posix.cpp
 )
 
-if (COMPILER_RT_INCLUDE_TESTS)
+if (GWP_ASAN_BUILD_TESTING)
   add_subdirectory(tests)
 endif ()

@@ -16,6 +16,32 @@ This repo contains a standalone gwp-asan, you can easily use it with CMake.
 
 Check the documents here: [gwp-asan](https://llvm.org/docs/GwpAsan.html)
 
+## Build
+
+```bash
+cmake -S . -B build -G Ninja
+cmake --build build --parallel
+```
+
+Build the example:
+
+```bash
+cmake -S . -B build -G Ninja -DGWP_ASAN_BUILD_EXAMPLE=ON
+cmake --build build --parallel
+```
+
+Run the upstream GWP-ASan unit tests:
+
+```bash
+cmake -S . -B build -G Ninja -DGWP_ASAN_BUILD_TESTING=ON
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
+```
+
+The tests require GoogleTest. Install `libgtest-dev` on Ubuntu or
+`gtest-devel` on Fedora/RHEL. If GoogleTest is not installed system-wide, pass
+`-DGWP_ASAN_GTEST_SOURCE_DIR=/path/to/googletest`.
+
 ## Integration
 
 TL;DR read the [example](https://github.com/fanyang89/gwp-asan/blob/main/example/helloworld/main.cc)
