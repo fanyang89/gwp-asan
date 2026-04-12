@@ -20,38 +20,20 @@ jobs:
         include:
           - name: Linux x64
             runner: ubuntu-24.04
-            os: linux
           - name: Linux arm64
             runner: ubuntu-24.04-arm
-            os: linux
-          - name: macOS x64
-            runner: macos-15-intel
-            os: macos
-          - name: macOS arm64
-            runner: macos-15
-            os: macos
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies on Linux
-        if: matrix.os == 'linux'
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build libjemalloc-dev
 
-      - name: Install dependencies on macOS
-        if: matrix.os == 'macos'
-        run: brew install ninja jemalloc
-
-      - name: Configure on Linux
-        if: matrix.os == 'linux'
+      - name: Configure
         run: cmake -S . -B build -G Ninja -DBUILD_EXAMPLE=ON
-
-      - name: Configure on macOS
-        if: matrix.os == 'macos'
-        run: cmake -S . -B build -G Ninja -DBUILD_EXAMPLE=ON -DCMAKE_EXE_LINKER_FLAGS="-L$(brew --prefix jemalloc)/lib"
 
       - name: Build
         run: cmake --build build --parallel
