@@ -4,6 +4,9 @@
 
 Independent standalone gwp-asan, from [llvm](https://github.com/llvm/llvm-project)
 
+This project is Linux only. It follows LLVM's upstream GWP-ASan support scope,
+which currently enables GWP-ASan on Linux.
+
 ## What's this
 
 GWP-ASan is a sampled allocator framework that assists in finding use-after-free and heap-buffer-overflow bugs in
